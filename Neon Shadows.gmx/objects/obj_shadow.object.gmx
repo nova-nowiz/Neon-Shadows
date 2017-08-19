@@ -31,6 +31,7 @@ grav = 1.2;
 hsp = 0;
 vsp = 0;
 mvframecount = 0
+previousmv = 0
 //how much is added
 jumpsp = 14;
 </string>
@@ -69,7 +70,7 @@ key_jump = -keyboard_check(vk_space);
     //Horizontal
     mvsp = 1/sqrt(mvframecount+0.3);
     mv = key_left + key_right;
-    if (mv != 0) then mvframecount +=2;
+    if (mv != 0 &amp;&amp; mv = previousmv) then mvframecount +=2;
     else mvframecount = 0;
     hsp += mv * mvsp;
 
@@ -118,8 +119,7 @@ key_jump = -keyboard_check(vk_space);
 //Final mvt
 x += hsp
 y += vsp
-
-
+previousmv = mv;
 </string>
           </argument>
         </arguments>
