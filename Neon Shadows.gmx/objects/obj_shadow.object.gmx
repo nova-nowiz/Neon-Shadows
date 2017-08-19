@@ -26,12 +26,14 @@
           <argument>
             <kind>1</kind>
             <string>///initialize variables
-grav = 0.2;
+fric = 0.4
+grav = 1.2;
 hsp = 0;
 vsp = 0;
+mvtframecount = 0
 //how much is added
-jumpsp = 7;
-mvsp = 4;
+jumpsp = 14;
+mvsp = 1/sqrt(mvtframecount+0.5);
 </string>
           </argument>
         </arguments>
@@ -62,36 +64,45 @@ key_jump = -keyboard_check(vk_space);
 
 //React to input
     //Horizontal
-mv = key_left + key_right;
-hsp = mv * mvsp;
+    mv = key_left + key_right;
+    if (mv != 0) then mvframecount +=5;
+    else mvframecount = 0;
+    hsp += mv * mvsp;
 
+        //frixion
+        if (mv != 0)
+        {
+            hsp -= fric;
+        } 
+        
     //Vertical
-if (vsp &lt; 10) vsp += grav;
+    if (vsp &lt; 10) vsp += grav;
 
-if (place_meeting(x,y+1,obj_wall))
-{
-    vsp = key_jump * jumpsp;
-}
-
-//Horizontal Collision
-if (place_meeting(x+hsp,y,obj_wall))
-{
-    while(!place_meeting(x+sign(hsp),y,obj_wall))
+    if (place_meeting(x,y+1,obj_wall))
     {
-        x += sign(hsp);
+        vsp = key_jump * jumpsp;
     }
-    hsp = 0;
-}
 
-//Vertical Collision
-if (place_meeting(x,y+vsp,obj_wall))
-{
-    while(!place_meeting(x,y+sign(vsp),obj_wall))
+//Collsion system
+    //Horizontal Collision
+    if (place_meeting(x+hsp,y,obj_wall))
     {
-        y += sign(vsp);
+        while(!place_meeting(x+sign(hsp),y,obj_wall))
+        {
+            x += sign(hsp);
+        }
+        hsp = 0;
     }
-    vsp = 0;
-}
+    
+    //Vertical Collision
+    if (place_meeting(x,y+vsp,obj_wall))
+    {
+        while(!place_meeting(x,y+sign(vsp),obj_wall))
+        {
+            y += sign(vsp);
+        }
+        vsp = 0;
+    }
 
 
 //Final mvt
