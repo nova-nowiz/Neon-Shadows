@@ -32,6 +32,9 @@ hsp = 0;
 vsp = 0;
 mvframecount = 0
 previousmv = 0
+    //max speeds
+    maxvsp = 10;
+    maxhsp = 10;
 //how much is added
 jumpsp = 14;
 </string>
@@ -56,30 +59,33 @@ jumpsp = 14;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///MOVEMENT
+            <string>//Camera movement
+camera_movement();
+
+///MOVEMENT
+
 //Get the player's input
 key_right = keyboard_check(ord("D"));
 key_left = -keyboard_check(ord("Q"));
 key_jump = -keyboard_check(vk_space);
 
 //React to input
-    //max speeds
-    maxvsp = 10;
-    maxhsp = 10;
-
     //Horizontal
-    mvsp = 1/sqrt(mvframecount+0.3);
+    mvsp = 1/sqrt(mvframecount+0.5);
     mv = key_left + key_right;
-    if (mv != 0 &amp;&amp; mv = previousmv) then mvframecount +=2;
+    if (mv != 0 &amp;&amp; mv = previousmv) then mvframecount +=1;
     else mvframecount = 0;
     hsp += mv * mvsp;
 
         //frixion
-        if (mv = 0 &amp;&amp; abs(hsp) &gt;= fric)
+        if (abs(hsp) &gt;= fric)
         {
-            hsp -= sign(hsp) * fric;
-        } 
-        if (abs(hsp) &lt; fric) hsp = 0;
+            if (mv = 0 || mv != sign(hsp))
+            {
+                hsp -= sign(hsp) * fric;
+            }
+        }
+        if (mv = 0 &amp;&amp; abs(hsp) &lt; fric) hsp = 0;
         
         //max speed
         if (abs(hsp) &gt; maxhsp) hsp = sign(hsp) * maxhsp;
@@ -94,7 +100,7 @@ key_jump = -keyboard_check(vk_space);
             vsp = key_jump * jumpsp;
         }
 
-//Collsion system
+//Collision system
     //Horizontal Collision
     if (place_meeting(x+hsp,y,obj_wall))
     {

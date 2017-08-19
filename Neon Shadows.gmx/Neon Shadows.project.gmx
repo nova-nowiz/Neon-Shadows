@@ -16,7 +16,6 @@
   </scripts>
   <objects name="objects">
     <object>objects\obj_shadow</object>
-    <object>objects\obj_shadow_dup</object>
     <object>objects\obj_wall</object>
   </objects>
   <rooms name="rooms">
