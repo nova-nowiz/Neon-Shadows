@@ -30,10 +30,9 @@ fric = 0.4
 grav = 1.2;
 hsp = 0;
 vsp = 0;
-mvtframecount = 0
+mvframecount = 0
 //how much is added
 jumpsp = 14;
-mvsp = 1/sqrt(mvtframecount+0.5);
 </string>
           </argument>
         </arguments>
@@ -63,25 +62,36 @@ key_left = -keyboard_check(ord("Q"));
 key_jump = -keyboard_check(vk_space);
 
 //React to input
+    //max speeds
+    maxvsp = 10;
+    maxhsp = 10;
+
     //Horizontal
+    mvsp = 1/sqrt(mvframecount+0.3);
     mv = key_left + key_right;
-    if (mv != 0) then mvframecount +=5;
+    if (mv != 0) then mvframecount +=2;
     else mvframecount = 0;
     hsp += mv * mvsp;
 
         //frixion
-        if (mv != 0)
+        if (mv = 0 &amp;&amp; abs(hsp) &gt;= fric)
         {
-            hsp -= fric;
+            hsp -= sign(hsp) * fric;
         } 
+        if (abs(hsp) &lt; fric) hsp = 0;
+        
+        //max speed
+        if (abs(hsp) &gt; maxhsp) hsp = sign(hsp) * maxhsp;
         
     //Vertical
-    if (vsp &lt; 10) vsp += grav;
-
-    if (place_meeting(x,y+1,obj_wall))
-    {
-        vsp = key_jump * jumpsp;
-    }
+        //gravity
+        if (vsp &lt; maxvsp) vsp += grav;
+        
+        //jump
+        if (place_meeting(x,y+1,obj_wall))
+        {
+            vsp = key_jump * jumpsp;
+        }
 
 //Collsion system
     //Horizontal Collision
