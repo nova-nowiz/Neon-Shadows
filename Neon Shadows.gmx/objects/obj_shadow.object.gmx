@@ -57,11 +57,28 @@ mvsp = 4;
             <string>//Get the player's input
 key_right = keyboard_check(ord("D"));
 key_left = -keyboard_check(ord("Q"));
-key_jump = keyboard_check(vk_space);
+key_jump = -keyboard_check(vk_space);
 
 //React to input
+    //horizontal
 mv = key_left + key_right;
-hsp = mv * mvsp
+hsp = mv * mvsp;
+
+    //vertical
+if (vsp &lt; 10) vsp += grav;
+
+if (place_meeting(x,y+1,obj_wall))
+{
+    vsp = key_jump * jumpsp;
+}
+
+
+
+
+x += hsp
+y += vsp
+
+
 </string>
           </argument>
         </arguments>
