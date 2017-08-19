@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>///initialize variables
 fric = 0.4
-grav = 1.2;
+grav = 0.8;
 hsp = 0;
 vsp = 0;
 mvframecount = 0
