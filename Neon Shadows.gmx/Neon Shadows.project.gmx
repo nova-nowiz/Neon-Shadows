@@ -15,6 +15,9 @@
     <object>objects\obj_shadow</object>
     <object>objects\obj_mur</object>
   </objects>
+  <rooms name="rooms">
+    <room>rooms\home</room>
+  </rooms>
   <help>
     <rtf>help.rtf</rtf>
   </help>
