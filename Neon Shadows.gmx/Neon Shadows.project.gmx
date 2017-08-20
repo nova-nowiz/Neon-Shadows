@@ -17,8 +17,10 @@
   <objects name="objects">
     <object>objects\obj_shadow</object>
     <object>objects\obj_wall</object>
+    <object>objects\obj_display_manager</object>
   </objects>
   <rooms name="rooms">
+    <room>rooms\_display_int</room>
     <room>rooms\home</room>
   </rooms>
   <help>
