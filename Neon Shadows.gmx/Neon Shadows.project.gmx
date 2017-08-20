@@ -8,19 +8,26 @@
   <sprites name="sprites">
     <sprite>sprites\spr_shadow</sprite>
     <sprite>sprites\spr_wall</sprite>
+    <sprite>sprites\spr_arrow</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
     <script>scripts\camera_movement.gml</script>
+    <script>scripts\scr_menu.gml</script>
   </scripts>
+  <fonts name="fonts">
+    <font>fonts\fnt_options</font>
+  </fonts>
   <objects name="objects">
     <object>objects\obj_shadow</object>
     <object>objects\obj_wall</object>
     <object>objects\obj_display_manager</object>
+    <object>objects\obj_menu</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\_display_int</room>
+    <room>rooms\menus</room>
     <room>rooms\home</room>
   </rooms>
   <help>
