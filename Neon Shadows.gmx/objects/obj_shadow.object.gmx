@@ -61,6 +61,7 @@ jumpsp = 10;
             <kind>1</kind>
             <string>//Camera movement
 camera_movement();
+image_speed = 0.08;
 
 ///MOVEMENT
 
