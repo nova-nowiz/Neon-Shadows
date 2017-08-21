@@ -63,22 +63,6 @@ jumpsp = 10;
 camera_movement();
 image_speed = 0.08;
 
-//Restart the level
-if (keyboard_check_pressed(ord("R"))) room_restart();
-
-//fullscreen
-if (keyboard_check_pressed(vk_f11))
-{
-   if window_get_fullscreen()
-   {
-      window_set_fullscreen(false);
-   }
-   else
-   {
-      window_set_fullscreen(true);
-   }
-}
-
 ///MOVEMENT ---------------------------------------
 
 //Get the player's input
