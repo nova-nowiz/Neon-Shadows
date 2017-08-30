@@ -37,6 +37,13 @@ previousmv = 0;
     maxhsp = 5;
 //how much is added
 jumpsp = 10;
+
+//camera
+view_zoom = 1;
+view_max_zoom = 10;
+view_xview = x - view_wview/2;
+view_yview = y-72 - view_hview/2;
+
 </string>
           </argument>
         </arguments>

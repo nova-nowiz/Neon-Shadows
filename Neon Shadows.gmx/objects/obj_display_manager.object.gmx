@@ -104,23 +104,16 @@ window_center();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///zoom window
-if (keyboard_check_pressed(vk_add))
+            <string>///fonctionalities
+//zoom window
+if (keyboard_check_pressed(vk_add) &amp;&amp; zoom + 1 &lt;= max_zoom) zoom++;
+if (keyboard_check_pressed(vk_subtract)&amp;&amp; zoom - 1 &gt;= 1) zoom--;
+
+if (keyboard_check_pressed(vk_add || vk_subtract))
 {
-    zoom++;
-    if (zoom &gt; max_zoom) zoom = max_zoom;
     window_set_size(ideal_width * zoom,ideal_height * zoom);
     alarm[0] = 1;
 }
-
-if (keyboard_check_pressed(vk_subtract))
-{
-    zoom--;
-    if (zoom &lt; 1) zoom = 1;
-    window_set_size(ideal_width * zoom,ideal_height * zoom);
-    alarm[0] = 1;
-}
-
 //Restart the level
 if (keyboard_check_pressed(ord("R"))) room_restart();
 
