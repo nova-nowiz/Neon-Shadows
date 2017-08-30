@@ -36,8 +36,22 @@ aspect_ratio = display_get_width()/display_get_height();
 
 ideal_width = round(ideal_height * aspect_ratio);
 
+//pixel perfect scaling
+if (display_get_width() mod ideal_width != 0)
+{
+    var d = round(display_get_width()/ideal_width);
+    ideal_width = display_get_width()/d;
+}
+
+if (display_get_height() mod ideal_height != 0)
+{
+    var d = round(display_get_height()/ideal_height);
+    ideal_height = display_get_height()/d;
+}
+
 //check for odd numbers
 if (ideal_width &amp; 1) ideal_width++;
+if (ideal_height &amp; 1) ideal_height++;
 
 //calculate max zoom
 max_zoom = floor(display_get_width()/ideal_width);
@@ -54,6 +68,7 @@ for (var i=1; i &lt;= room_last; i++)
 
 //resize
 surface_resize(application_surface,ideal_width,ideal_height);
+display_set_gui_size(ideal_width,ideal_height);
 window_set_size(ideal_width,ideal_height);
 
 //game starts
@@ -112,6 +127,7 @@ if (keyboard_check_pressed(vk_subtract)&amp;&amp; zoom - 1 &gt;= 1) zoom--;
 if (keyboard_check_pressed(vk_add || vk_subtract))
 {
     window_set_size(ideal_width * zoom,ideal_height * zoom);
+    surface_resize(application_surface,ideal_width * zoom,ideal_height * zoom);
     alarm[0] = 1;
 }
 //Restart the level

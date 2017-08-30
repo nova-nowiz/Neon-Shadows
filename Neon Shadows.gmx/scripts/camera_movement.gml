@@ -12,6 +12,6 @@ view_hview = obj_display_manager.ideal_height/view_zoom; */
 
 //centering
 view_xview[0] += ((x - view_wview[0]/2) - view_xview[0]) * 0.3;
-view_yview[0] += ((y-72 - view_hview[0]/2) - view_yview[0]) * 0.1;
+view_yview[0] += ((y-72 - view_hview[0]/2) - view_yview[0]) * 0.3;
 //view_yview[0] -= (view_hview[0]-(y - view_yview[0])-128) * 0.1;   //view not centered
 //view_yview[0] -= (view_hview[0]/2-(y-view_yview[0])) * 0.1;  //view really centered
