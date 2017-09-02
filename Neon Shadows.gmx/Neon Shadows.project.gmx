@@ -29,6 +29,13 @@
     <object>objects\obj_wall</object>
     <object>objects\obj_display_manager</object>
     <object>objects\obj_menu</object>
+    <objects name="obj_button">
+      <object>objects\obj_button_start</object>
+      <object>objects\obj_button_continue</object>
+      <object>objects\obj_button_levelselect</object>
+      <object>objects\obj_button_options</object>
+      <object>objects\obj_button_quit</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\_display_int</room>

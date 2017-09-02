@@ -36,6 +36,10 @@ menu [4] = "Quit";
 space = 64;
 mpos = 0;
 
+//mouse moving condition
+hasmoved = 1;
+previousmouse_x=mouse_x;
+previousmouse_y=mouse_y;
 </string>
           </argument>
         </arguments>
@@ -58,7 +62,10 @@ mpos = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var move = 0;
+            <string>///MENU SELECT
+
+//Keyboard select
+var move = 0;
 move -= max(keyboard_check_pressed(vk_up), keyboard_check_pressed(ord("Z")), 0);
 move += max(keyboard_check_pressed(vk_down), keyboard_check_pressed(ord("S")), 0);
 
@@ -69,14 +76,33 @@ if(move != 0)
     if(mpos &lt; 0) mpos = array_length_1d(menu) - 1;
     if(mpos &gt; array_length_1d(menu) -1) mpos = 0;
 }
-var push;
 
+//Mouse select
+if(hasmoved !=0)
+{
+    if(place_meeting(mouse_x, mouse_y, obj_button_start)) then mpos = 0;
+    if(place_meeting(mouse_x, mouse_y, obj_button_continue)) then mpos = 1;
+    if(place_meeting(mouse_x, mouse_y, obj_button_levelselect)) then mpos = 2;
+    if(place_meeting(mouse_x, mouse_y, obj_button_options)) then mpos = 3;
+    if(place_meeting(mouse_x, mouse_y, obj_button_quit)) then mpos = 4;
+    hasmoved = 0;
+}
+//Mouse moving condition
+if(mouse_x != previousmouse_x &amp;&amp; mouse_y != previousmouse_y  &amp;&amp; hasmoved = 0){
+    hasmoved = 1;
+}
+
+previousmouse_x = mouse_x;
+previousmouse_y = mouse_y;
+
+//Activation script
+var push;
 
 push = max(keyboard_check_released(vk_enter), mouse_check_button_released(mb_left),
 keyboard_check_released(vk_space), keyboard_check_released(vk_shift), 0);
 if (push == 1) 
 {
-scr_menu();
+    scr_menu();
 }
 </string>
           </argument>
@@ -112,9 +138,9 @@ for (m = 0; m &lt; array_length_1d(menu); m += 1)
 }
 
 draw_sprite(sprite_index, -1, x+16, y + mpos * space/2 - 16);
-
 image_speed = 0.5;
 
+window_center();
 </string>
           </argument>
         </arguments>

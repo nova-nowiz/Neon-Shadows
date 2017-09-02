@@ -44,7 +44,6 @@ view_max_zoom = 10;
 view_xview = x - view_wview/2;
 view_yview = y-72 - view_hview/2;
 
-
 </string>
           </argument>
         </arguments>
@@ -153,18 +152,19 @@ key_jump_held = keyboard_check(vk_space);
           <argument>
             <kind>1</kind>
             <string>///SPRITE GESTION -----------------------------------
-image_speed = 0.08;
+image_speed = hsp/maxhsp * 0.08;
 
 //Sprite direction
+if(place_meeting(x, y+1,obj_wall)){
 if(mv = 0){
 if(previousmv =-1)then sprite_index = spr_shadow_standing_Left;
 if(previousmv = 1)then sprite_index = spr_shadow_standing_Right;
 }
 
-
 if(previousmv != mv){
 if(mv = 1) then sprite_index = spr_shadow_moving_Right;  
 if(mv = -1) then sprite_index = spr_shadow_moving_Left;
+}
 }
 </string>
           </argument>
