@@ -25,7 +25,11 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Initialize Menu values
+            <string>///INITIALISATION
+//centering
+window_center();
+
+//Initialize Menu values
 menu [0] = "Start";
 menu [1] = "Continue";
 menu [2] = "Level select";
@@ -137,8 +141,6 @@ for (m = 0; m &lt; array_length_1d(menu); m += 1)
 
 draw_sprite(sprite_index, -1, x+16, y + mpos * space/2 - 16);
 image_speed = 0.5;
-
-window_center();
 </string>
           </argument>
         </arguments>

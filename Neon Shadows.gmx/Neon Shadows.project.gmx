@@ -14,6 +14,10 @@
       <sprite>sprites\spr_shadow_moving_Left</sprite>
       <sprite>sprites\spr_shadow_moving_Right</sprite>
     </sprites>
+    <sprites name="spr_button">
+      <sprite>sprites\spr_button_start_off</sprite>
+      <sprite>sprites\spr_button_start_on</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
