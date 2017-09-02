@@ -11,6 +11,8 @@
     <sprites name="spr_shadow">
       <sprite>sprites\spr_shadow_standing_Right</sprite>
       <sprite>sprites\spr_shadow_standing_Left</sprite>
+      <sprite>sprites\spr_shadow_moving_Left</sprite>
+      <sprite>sprites\spr_shadow_moving_Right</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background"/>
