@@ -44,6 +44,7 @@ view_max_zoom = 10;
 view_xview = x - view_wview/2;
 view_yview = y-72 - view_hview/2;
 
+
 </string>
           </argument>
         </arguments>
@@ -131,8 +132,6 @@ key_jump_held = keyboard_check(vk_space);
     }
     y += vsp
     
-//previousmv loop
-previousmv = mv;
 </string>
           </argument>
         </arguments>
@@ -156,6 +155,39 @@ previousmv = mv;
             <string>///SPRITE GESTION -----------------------------------
 image_speed = 0.08;
 
+//Sprite direction
+if(mv = 0){
+if(previousmv =-1)then sprite_index = spr_shadow_standing_Left;
+if(previousmv = 1)then sprite_index = spr_shadow_standing_Right;
+}
+
+
+if(previous_mv != mv){
+if(mv = 1) then sprite_index = spr_shadow_moving_Right;  
+if(mv = -1) then sprite_index = spr_shadow_moving_Left;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///PREVIOUS MV = MV
+previousmv = mv;
 </string>
           </argument>
         </arguments>
