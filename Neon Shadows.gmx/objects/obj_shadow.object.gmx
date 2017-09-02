@@ -162,7 +162,7 @@ if(previousmv = 1)then sprite_index = spr_shadow_standing_Right;
 }
 
 
-if(previous_mv != mv){
+if(previousmv != mv){
 if(mv = 1) then sprite_index = spr_shadow_moving_Right;  
 if(mv = -1) then sprite_index = spr_shadow_moving_Left;
 }
