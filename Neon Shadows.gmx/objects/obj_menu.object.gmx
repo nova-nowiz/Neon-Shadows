@@ -77,6 +77,9 @@ if(move != 0)
     if(mpos &gt; array_length_1d(menu) -1) mpos = 0;
 }
 
+//Mouse moving condition
+if(mouse_x != previousmouse_x &amp;&amp; mouse_y != previousmouse_y) mv_mouse = 1;
+if(mouse_x = previousmouse_x &amp;&amp; mouse_y = previousmouse_y) mv_mouse = 0;
 //Mouse select
 if(move_mouse !=0)
 {
@@ -85,11 +88,6 @@ if(move_mouse !=0)
     if(place_meeting(mouse_x, mouse_y, obj_button_levelselect)) then mpos = 2;
     if(place_meeting(mouse_x, mouse_y, obj_button_options)) then mpos = 3;
     if(place_meeting(mouse_x, mouse_y, obj_button_quit)) then mpos = 4;
-    move_mouse = 0;
-}
-//Mouse moving condition
-if(mouse_x != previousmouse_x &amp;&amp; mouse_y != previousmouse_y  &amp;&amp; move_mouse = 0){
-    move_mouse = 1;
 }
 
 previousmouse_x = mouse_x;
