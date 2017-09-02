@@ -37,7 +37,7 @@ space = 64;
 mpos = 0;
 
 //mouse moving condition
-hasmoved = 1;
+move_mouse = 1;
 previousmouse_x=mouse_x;
 previousmouse_y=mouse_y;
 </string>
@@ -78,18 +78,18 @@ if(move != 0)
 }
 
 //Mouse select
-if(hasmoved !=0)
+if(move_mouse !=0)
 {
     if(place_meeting(mouse_x, mouse_y, obj_button_start)) then mpos = 0;
     if(place_meeting(mouse_x, mouse_y, obj_button_continue)) then mpos = 1;
     if(place_meeting(mouse_x, mouse_y, obj_button_levelselect)) then mpos = 2;
     if(place_meeting(mouse_x, mouse_y, obj_button_options)) then mpos = 3;
     if(place_meeting(mouse_x, mouse_y, obj_button_quit)) then mpos = 4;
-    hasmoved = 0;
+    move_mouse = 0;
 }
 //Mouse moving condition
-if(mouse_x != previousmouse_x &amp;&amp; mouse_y != previousmouse_y  &amp;&amp; hasmoved = 0){
-    hasmoved = 1;
+if(mouse_x != previousmouse_x &amp;&amp; mouse_y != previousmouse_y  &amp;&amp; move_mouse = 0){
+    move_mouse = 1;
 }
 
 previousmouse_x = mouse_x;
