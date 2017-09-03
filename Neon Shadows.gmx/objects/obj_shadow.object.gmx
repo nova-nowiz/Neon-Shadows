@@ -94,9 +94,9 @@ crouch_pressed = max(keyboard_check_pressed(vk_shift),keyboard_check_pressed(vk_
         if (crouch &amp;&amp; abs(hsp) &lt;= maxcrouchhsp) sliding = 0;
         
         //frixion
-        if (abs(hsp) &gt;= fric)
+        if (abs(hsp) &gt;= fric &amp;&amp; !sliding)
         {
-            if ((mv == 0 || mv != sign(hsp)) &amp;&amp; !sliding)
+            if (mv == 0 || mv != sign(hsp))
             {
                 hsp -= sign(hsp) * fric;
             }
@@ -173,21 +173,72 @@ else mvframecount = 0;
           <argument>
             <kind>1</kind>
             <string>///SPRITE GESTION -----------------------------------
-//Sprite direction
-if(place_meeting(x, y+1,obj_wall))
+//on land
+if(place_meeting(x,y+1,obj_wall))
 {
-
-    if (hsp == 0)
+    //standing up (standing)
+    if (hsp == 0 &amp;&amp; mv == 0 &amp;&amp; !crouch)
     {
-        if (previousmv == -1) sprite_index = spr_shadow_standing_Left;
+        image_speed = 0.08;
         if (previousmv == 1) sprite_index = spr_shadow_standing_Right;
+        if (previousmv == -1) sprite_index = spr_shadow_standing_Left;
     }
-
-    if (previousmv != mv &amp;&amp; hsp != 0)
+    
+    //standing up (walking)
+    if (mv * hsp &gt; 0 &amp;&amp; !crouch)
     {
         image_speed = hsp/maxhsp * 0.08;
-        if (mv == 1) sprite_index = spr_shadow_moving_Right;  
+        if (mv == 1) sprite_index = spr_shadow_moving_Right;
         if (mv == -1) sprite_index = spr_shadow_moving_Left;
+    }
+    
+    //crouching (standing)
+    if (hsp == 0 &amp;&amp; mv == 0 &amp;&amp; crouch)
+    {
+        image_speed = 0.08;
+        if (previousmv == 1) sprite_index = spr_shadow_crouch_standing_Right;
+        if (previousmv == -1) sprite_index = spr_shadow_crouch_standing_Left;
+    }
+    
+    //crouching (walking)
+    if (previousmv != mv &amp;&amp; hsp != 0 &amp;&amp; crouch)
+    {
+        image_speed = hsp/maxhsp * 0.08;
+        if (mv == 1) sprite_index = spr_shadow_moving_Right;
+        if (mv == -1) sprite_index = spr_shadow_moving_Left;
+    }
+    
+    //sliding
+    if (sliding)
+    {
+        image_speed = 0.08;
+        if (sign(hsp) &gt; 0) sprite_index = spr_shadow_slide_Right;
+        if (sign(hsp) &lt; 0) sprite_index = spr_shadow_slide_Left;
+    }
+    
+    //"drifting"
+    if (previousmv != mv &amp;&amp; mv * hsp &lt; 0)
+    {
+        image_speed = 0.08;
+        if (mv == 1) sprite_index = spr_shadow_drift_Right;
+        if (mv == -1) sprite_index = spr_shadow_drift_Left;
+    }
+}
+
+if(!place_meeting(x, y+1,obj_wall))
+{
+    //jump (up)
+    if (vsp &gt; 0) 
+    {
+        if (mv &gt; 0)sprite_index = spr_shadow_jump_up_Right;
+        if (mv &lt; 0)sprite_index = spr_shadow_jump_up_Left;
+    }
+    
+    //jump (down)
+    if (vsp &lt; 0) 
+    {
+        if (mv &gt; 0)sprite_index = spr_shadow_jump_down_Right;
+        if (mv &lt; 0)sprite_index = spr_shadow_jump_down_Left;
     }
 }
 </string>
