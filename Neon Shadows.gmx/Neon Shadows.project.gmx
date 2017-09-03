@@ -9,10 +9,48 @@
     <sprite>sprites\spr_wall</sprite>
     <sprite>sprites\spr_arrow</sprite>
     <sprites name="spr_shadow">
-      <sprite>sprites\spr_shadow_standing_Right</sprite>
-      <sprite>sprites\spr_shadow_standing_Left</sprite>
-      <sprite>sprites\spr_shadow_moving_Left</sprite>
-      <sprite>sprites\spr_shadow_moving_Right</sprite>
+      <sprites name="standing up">
+        <sprites name="standing">
+          <sprite>sprites\spr_shadow_standing_Right</sprite>
+          <sprite>sprites\spr_shadow_standing_Left</sprite>
+        </sprites>
+        <sprites name="moving">
+          <sprite>sprites\spr_shadow_moving_Right</sprite>
+          <sprite>sprites\spr_shadow_moving_Left</sprite>
+        </sprites>
+      </sprites>
+      <sprites name="crouching">
+        <sprites name="standing">
+          <sprite>sprites\spr_shadow_crouch_standing_Right</sprite>
+          <sprite>sprites\spr_shadow_crouch_standing_Left</sprite>
+        </sprites>
+        <sprites name="moving">
+          <sprite>sprites\spr_shadow_crouch_moving_Right</sprite>
+          <sprite>sprites\spr_shadow_crouch_moving_Left</sprite>
+        </sprites>
+      </sprites>
+      <sprites name="jumping">
+        <sprites name="up">
+          <sprite>sprites\spr_shadow_jump_up_Right</sprite>
+          <sprite>sprites\spr_shadow_jump_up_Left</sprite>
+        </sprites>
+        <sprites name="down">
+          <sprite>sprites\spr_shadow_jump_down_Right</sprite>
+          <sprite>sprites\spr_shadow_jump_down_Left</sprite>
+        </sprites>
+      </sprites>
+      <sprites name="sliding">
+        <sprite>sprites\spr_shadow_slide_Right</sprite>
+        <sprite>sprites\spr_shadow_slide_Left</sprite>
+      </sprites>
+      <sprites name="dashing">
+        <sprite>sprites\spr_shadow_dash_Right</sprite>
+        <sprite>sprites\spr_shadow_dash_Left</sprite>
+      </sprites>
+      <sprites name="&quot;drifting&quot;">
+        <sprite>sprites\spr_shadow_drift_Right</sprite>
+        <sprite>sprites\spr_shadow_drift_Left</sprite>
+      </sprites>
     </sprites>
     <sprites name="spr_button">
       <sprite>sprites\spr_button_start_off</sprite>

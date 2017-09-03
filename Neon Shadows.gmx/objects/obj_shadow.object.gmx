@@ -26,15 +26,19 @@
           <argument>
             <kind>1</kind>
             <string>///initialize variables
+image_speed = 0.08;
 fric = 0.6;
+fric_slide = 0.2;
 grav = 0.6;
 hsp = 0;
 vsp = 0;
 mvframecount = 0;
 previousmv = 0;
+sliding = 0;
     //max speeds
     maxvsp = 10;
     maxhsp = 5;
+    maxcrouchhsp = 2.5;
 //how much is added
 jumpsp = 10;
 
@@ -67,7 +71,7 @@ view_yview = y-72 - view_hview/2;
           <argument>
             <kind>1</kind>
             <string>///MOVEMENT ----------------------------------------
-//camera mouvement
+//camera movement
 camera_movement();
 
 //Get the player's input
@@ -75,27 +79,41 @@ key_right = keyboard_check(ord("D"));
 key_left = -keyboard_check(ord("Q"));
 key_jump = -keyboard_check_pressed(vk_space);
 key_jump_held = keyboard_check(vk_space);
+crouch = max(keyboard_check(vk_shift),keyboard_check(vk_control));
+crouch_pressed = max(keyboard_check_pressed(vk_shift),keyboard_check_pressed(vk_control));
 
 //React to input
     //Horizontal
     mv = key_left + key_right;
     mvsp = 1/sqrt(mvframecount+0.5);
-    if (mv != 0 &amp;&amp; mv == previousmv) mvframecount +=1;
-    else mvframecount = 0;
-    hsp += mv * mvsp;
+    if (crouch) mvsp = mvsp * 0.5;
+    if (!sliding) hsp += mv * mvsp;
 
+        //sliding ?
+        if (crouch &amp;&amp; abs(hsp) &gt;= maxhsp) sliding = 1;
+        if (crouch &amp;&amp; abs(hsp) &lt;= maxcrouchhsp) sliding = 0;
+        
         //frixion
         if (abs(hsp) &gt;= fric)
         {
-            if (mv = 0 || mv != sign(hsp))
+            if ((mv == 0 || mv != sign(hsp)) &amp;&amp; !sliding)
             {
                 hsp -= sign(hsp) * fric;
             }
         }
-        if (mv == 0 &amp;&amp; abs(hsp) &lt; fric) hsp = 0;
+        if (mv == 0 &amp;&amp; abs(hsp) &lt; fric &amp;&amp; !sliding) hsp = 0;
+        if (sliding) hsp -= fric_slide;
         
         //max speed
-        if (abs(hsp) &gt; maxhsp) hsp = sign(hsp) * maxhsp;
+        if (abs(hsp) &gt; maxhsp)
+        {
+        hsp = sign(hsp) * maxhsp;
+        }
+        
+        if (crouch &amp;&amp; !sliding &amp;&amp; abs(hsp) &gt; maxcrouchhsp)
+        {
+        hsp = sign(hsp) * maxcrouchhsp;
+        }
         
     //Vertical
         //gravity
@@ -131,6 +149,9 @@ key_jump_held = keyboard_check(vk_space);
     }
     y += vsp
     
+//mvframecount calcul
+if (mv != 0 &amp;&amp; mv == previousmv) mvframecount +=1;
+else mvframecount = 0;
 </string>
           </argument>
         </arguments>
@@ -152,20 +173,19 @@ key_jump_held = keyboard_check(vk_space);
           <argument>
             <kind>1</kind>
             <string>///SPRITE GESTION -----------------------------------
-image_speed = hsp/maxhsp * 0.08;
-
 //Sprite direction
 if(place_meeting(x, y+1,obj_wall))
 {
 
-    if (mv == 0)
+    if (hsp == 0)
     {
         if (previousmv == -1) sprite_index = spr_shadow_standing_Left;
         if (previousmv == 1) sprite_index = spr_shadow_standing_Right;
     }
 
-    if (previousmv != mv)
+    if (previousmv != mv &amp;&amp; hsp != 0)
     {
+        image_speed = hsp/maxhsp * 0.08;
         if (mv == 1) sprite_index = spr_shadow_moving_Right;  
         if (mv == -1) sprite_index = spr_shadow_moving_Left;
     }
