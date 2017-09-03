@@ -80,7 +80,7 @@ key_jump_held = keyboard_check(vk_space);
     //Horizontal
     mv = key_left + key_right;
     mvsp = 1/sqrt(mvframecount+0.5);
-    if (mv != 0 &amp;&amp; mv == previousmv) then mvframecount +=1;
+    if (mv != 0 &amp;&amp; mv == previousmv) mvframecount +=1;
     else mvframecount = 0;
     hsp += mv * mvsp;
 
@@ -155,16 +155,20 @@ key_jump_held = keyboard_check(vk_space);
 image_speed = hsp/maxhsp * 0.08;
 
 //Sprite direction
-if(place_meeting(x, y+1,obj_wall)){
-if(mv == 0){
-if(previousmv == -1)then sprite_index = spr_shadow_standing_Left;
-if(previousmv == 1)then sprite_index = spr_shadow_standing_Right;
-}
+if(place_meeting(x, y+1,obj_wall))
+{
 
-if(previousmv != mv){
-if(mv == 1) then sprite_index = spr_shadow_moving_Right;  
-if(mv == -1) then sprite_index = spr_shadow_moving_Left;
-}
+    if (mv == 0)
+    {
+        if (previousmv == -1) sprite_index = spr_shadow_standing_Left;
+        if (previousmv == 1) sprite_index = spr_shadow_standing_Right;
+    }
+
+    if (previousmv != mv)
+    {
+        if (mv == 1) sprite_index = spr_shadow_moving_Right;  
+        if (mv == -1) sprite_index = spr_shadow_moving_Left;
+    }
 }
 </string>
           </argument>

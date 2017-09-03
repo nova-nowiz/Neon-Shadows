@@ -87,15 +87,12 @@ if(mouse_x = previousmouse_x &amp;&amp; mouse_y = previousmouse_y) mv_mouse = 0;
 //Mouse select
 if(move_mouse !=0)
 {
-    if(place_meeting(mouse_x, mouse_y, obj_button_start)) then mpos = 0;
-    if(place_meeting(mouse_x, mouse_y, obj_button_continue)) then mpos = 1;
-    if(place_meeting(mouse_x, mouse_y, obj_button_levelselect)) then mpos = 2;
-    if(place_meeting(mouse_x, mouse_y, obj_button_options)) then mpos = 3;
-    if(place_meeting(mouse_x, mouse_y, obj_button_quit)) then mpos = 4;
+    if(place_meeting(mouse_x, mouse_y, obj_button_start)) mpos = 0;
+    if(place_meeting(mouse_x, mouse_y, obj_button_continue)) mpos = 1;
+    if(place_meeting(mouse_x, mouse_y, obj_button_levelselect)) mpos = 2;
+    if(place_meeting(mouse_x, mouse_y, obj_button_options)) mpos = 3;
+    if(place_meeting(mouse_x, mouse_y, obj_button_quit)) mpos = 4;
 }
-
-previousmouse_x = mouse_x;
-previousmouse_y = mouse_y;
 
 //Activation script
 var push;
@@ -106,6 +103,30 @@ if (push == 1)
 {
     scr_menu();
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///PREVIOUSMOUSE
+previousmouse_x = mouse_x;
+previousmouse_y = mouse_y;
+
 </string>
           </argument>
         </arguments>
