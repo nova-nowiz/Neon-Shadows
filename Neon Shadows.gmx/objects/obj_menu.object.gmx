@@ -81,8 +81,11 @@ if(move != 0)
     if(mpos &gt; array_length_1d(menu) -1) mpos = 0;
 }
 
+//Mouse moving condition
+if(mouse_x != previousmouse_x &amp;&amp; mouse_y != previousmouse_y) mv_mouse = 1;
+if(mouse_x = previousmouse_x &amp;&amp; mouse_y = previousmouse_y) mv_mouse = 0;
 //Mouse select
-if(mouse_x == previousmouse_x &amp;&amp; mouse_y == previousmouse_y)
+if(move_mouse !=0)
 {
     if(place_meeting(mouse_x, mouse_y, obj_button_start)) mpos = 0;
     if(place_meeting(mouse_x, mouse_y, obj_button_continue)) mpos = 1;
@@ -100,7 +103,6 @@ if (push == 1)
 {
     scr_menu();
 }
-
 </string>
           </argument>
         </arguments>
