@@ -15,3 +15,6 @@ view_xview[0] += ((x - view_wview[0]/2) - view_xview[0]) * 0.3;
 view_yview[0] += ((y-72 - view_hview[0]/2) - view_yview[0]) * 0.3;
 //view_yview[0] -= (view_hview[0]-(y - view_yview[0])-128) * 0.1;   //view not centered
 //view_yview[0] -= (view_hview[0]/2-(y-view_yview[0])) * 0.1;  //view really centered
+
+view_xview[0] = clamp(view_xview[0],0,room_width-view_wview);
+view_yview[0] = clamp(view_yview[0],0,room_height-view_hview);

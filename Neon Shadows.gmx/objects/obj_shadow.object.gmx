@@ -95,8 +95,11 @@ crouch_released = max(keyboard_check_released(vk_shift),keyboard_check_released(
 
         //sliding ?
         if (crouch &amp;&amp; abs(hsp) &gt;= maxhsp) sliding = 1;
-        if (crouch &amp;&amp; abs(hsp) &lt;= maxcrouchhsp) sliding = 0;
-        
+        if (sliding = 1 &amp;&amp; abs(hsp) &lt;= maxcrouchhsp)
+        {
+            x+= sign(hsp) * 32
+            sliding = 0;
+        }
         //frixion
         if (abs(hsp) &gt;= fric &amp;&amp; !sliding)
         {
@@ -140,7 +143,7 @@ crouch_released = max(keyboard_check_released(vk_shift),keyboard_check_released(
         }
         hsp = 0;
     }
-    x += hsp
+    x += hsp;
     
     //Vertical Collision
     if (place_meeting(x,y+vsp,obj_wall))
@@ -151,8 +154,9 @@ crouch_released = max(keyboard_check_released(vk_shift),keyboard_check_released(
         }
         vsp = 0;
     }
-    y += vsp
+    y += vsp;
     
+    x = clamp(x,16,room_width-16);
 //mvframecount calcul
 if (mv != 0 &amp;&amp; mv == previousmv) mvframecount +=1;
 else mvframecount = 0;

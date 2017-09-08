@@ -25,24 +25,52 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>Sname = part_system_create();
+            <string>particle_direction = 255;
+emitter_xmax = room_width + (room_height * tan(degtorad(270-particle_direction)));
+
+
+Sname = part_system_create();
 part_system_depth(Sname, 10)
 particle1 = part_type_create();
 part_type_shape(particle1,pt_shape_line);
 part_type_size(particle1,0.20,0.30,0,0);
-part_type_scale(particle1,2,0.20);
+part_type_scale(particle1,1.5,0.5);
 part_type_color1(particle1,12632256);
 part_type_alpha2(particle1,1,0);
 part_type_speed(particle1,5,15,0,0);
-part_type_direction(particle1,255,255,0,0);
-part_type_gravity(particle1,0.01,255);
+part_type_direction(particle1,particle_direction,particle_direction,0,0);
+part_type_gravity(particle1,0.01,particle_direction);
 part_type_orientation(particle1,0,0,0,0,1);
 part_type_blend(particle1,1);
-part_type_life(particle1,room_speed*2,room_speed*2);
+part_type_life(particle1,room_speed*1,room_speed*2);
 
 emitter1 = part_emitter_create(Sname);
-part_emitter_region(Sname,emitter1,0,room_width,0,0,ps_shape_line,0);
+part_emitter_region(Sname,emitter1,0,emitter_xmax,0,0,ps_shape_line,0);
 part_emitter_stream(Sname,emitter1,particle1,20);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>emitter_xmax = room_width + (room_height * tan(degtorad(270-particle_direction)));
+part_emitter_region(Sname,emitter1,0,emitter_xmax,0,0,ps_shape_line,0);
 </string>
           </argument>
         </arguments>
