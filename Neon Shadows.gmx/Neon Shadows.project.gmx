@@ -71,6 +71,7 @@
     <object>objects\obj_wall</object>
     <object>objects\obj_display_manager</object>
     <object>objects\obj_menu</object>
+    <object>objects\obj_pause</object>
     <object>objects\obj_rain</object>
     <objects name="obj_button">
       <object>objects\obj_button_start</object>
