@@ -25,6 +25,33 @@
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///states
+enum states
+{
+    stand,
+    crouch,
+    slide
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///initialize variables
 image_speed = 0.08;
 fric = 0.4;
@@ -36,6 +63,7 @@ mvframecount = 0;
 previousmv = 0;
 sliding = 0;
 previous_hsp_sign = 1;
+state = states.stand;
     //max speeds
     maxvsp = 10;
     maxhsp = 5;
@@ -73,93 +101,14 @@ view_yview = y-72 - view_hview/2;
             <kind>1</kind>
             <string>///MOVEMENT ----------------------------------------
 //camera movement
-camera_movement();
+scr_camera_movement();
 
-//Get the player's input
-key_right = keyboard_check(ord("D"));
-key_left = -keyboard_check(ord("Q"));
-key_jump = -keyboard_check_pressed(vk_space);
-key_jump_held = keyboard_check(vk_space);
-crouch = max(keyboard_check(vk_shift),keyboard_check(vk_control));
-crouch_pressed = max(keyboard_check_pressed(vk_shift),keyboard_check_pressed(vk_control));
-crouch_released = max(keyboard_check_released(vk_shift),keyboard_check_released(vk_control));
-
-//React to input
-    //Horizontal
-    mv = key_left + key_right;
-    mvsp = 1/sqrt(mvframecount+0.5);
-    if (crouch) mvsp = mvsp * 0.5;
-    if (!sliding) hsp += mv * mvsp;
-    //if (crouch_pressed) y += 32;
-    //if (crouch_released) y -= 32;
-
-        //sliding ?
-        if (crouch &amp;&amp; abs(hsp) &gt;= maxhsp) sliding = 1;
-        if (sliding = 1 &amp;&amp; abs(hsp) &lt;= maxcrouchhsp)
-        {
-            x+= sign(hsp) * 32
-            sliding = 0;
-        }
-        //frixion
-        if (abs(hsp) &gt;= fric &amp;&amp; !sliding)
-        {
-            if (mv == 0 || mv != sign(hsp))
-            {
-                hsp -= sign(hsp) * fric;
-            }
-        }
-        if (mv == 0 &amp;&amp; abs(hsp) &lt; fric &amp;&amp; !sliding) hsp = 0;
-        if (sliding) hsp -= sign(hsp) * fric_slide;
-        
-        //max speed
-        if (abs(hsp) &gt; maxhsp)
-        {
-        hsp = sign(hsp) * maxhsp;
-        }
-        
-        if (crouch &amp;&amp; !sliding &amp;&amp; abs(hsp) &gt; maxcrouchhsp)
-        {
-        hsp = sign(hsp) * maxcrouchhsp;
-        }
-        
-    //Vertical
-        //gravity
-        if (vsp &lt; maxvsp) vsp += grav;
-        
-        //jump
-        if (place_meeting(x,y+1,obj_wall))
-        {
-            vsp = key_jump * jumpsp;
-        }
-        if(vsp &lt; 0 &amp;&amp; !key_jump_held) vsp = max(vsp,-jumpsp/4);
-        
-//Collision system &amp;&amp; Final mvt
-    //Horizontal Collision
-    if (place_meeting(x+hsp,y,obj_wall))
-    {
-        while(!place_meeting(x+sign(hsp),y,obj_wall))
-        {
-            x += sign(hsp);
-        }
-        hsp = 0;
-    }
-    x += hsp;
-    
-    //Vertical Collision
-    if (place_meeting(x,y+vsp,obj_wall))
-    {
-        while(!place_meeting(x,y+sign(vsp),obj_wall))
-        {
-            y += sign(vsp);
-        }
-        vsp = 0;
-    }
-    y += vsp;
-    
-    x = clamp(x,16,room_width-16);
-//mvframecount calcul
-if (mv != 0 &amp;&amp; mv == previousmv) mvframecount +=1;
-else mvframecount = 0;
+switch(state)
+{
+    case states.stand: scr_shadow_stand(); break;
+    case states.crouch: scr_shadow_crouch(); break;
+    case states.slide: scr_shadow_slide(); break;
+}
 </string>
           </argument>
         </arguments>
@@ -184,7 +133,7 @@ else mvframecount = 0;
 //on land
 if(place_meeting(x,y+1,obj_wall))
 {
-    if (!crouch)
+    if (state != states.crouch)
     {
         //standing up (standing)
         if (hsp == 0)
@@ -211,7 +160,7 @@ if(place_meeting(x,y+1,obj_wall))
         }
     }
     
-    if (crouch)
+    if (state = states.crouch)
     {
         //crouching (standing)
         if (hsp == 0)
@@ -230,7 +179,7 @@ if(place_meeting(x,y+1,obj_wall))
         }
     }
     //sliding
-    if (sliding)
+    if (state = states.slide)
     {
         image_speed = 0.08;
         if (sign(hsp) &gt; 0) sprite_index = spr_shadow_slide_Right;

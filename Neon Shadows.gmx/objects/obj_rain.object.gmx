@@ -47,6 +47,11 @@ part_type_life(particle1,room_speed*1,room_speed*2);
 emitter1 = part_emitter_create(Sname);
 part_emitter_region(Sname,emitter1,0,emitter_xmax,0,0,ps_shape_line,0);
 part_emitter_stream(Sname,emitter1,particle1,20);
+
+repeat (room_speed * 3)
+   {
+   part_system_update(Sname);
+   }
 </string>
           </argument>
         </arguments>

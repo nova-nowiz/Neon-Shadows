@@ -60,8 +60,15 @@
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
-    <script>scripts\camera_movement.gml</script>
+    <script>scripts\scr_camera_movement.gml</script>
     <script>scripts\scr_menu.gml</script>
+    <scripts name="shadow_states">
+      <script>scripts\scr_getinput.gml</script>
+      <script>scripts\scr_collision.gml</script>
+      <script>scripts\scr_shadow_stand.gml</script>
+      <script>scripts\scr_shadow_crouch.gml</script>
+      <script>scripts\scr_shadow_slide.gml</script>
+    </scripts>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fnt_options</font>
