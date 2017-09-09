@@ -65,9 +65,16 @@
     <scripts name="shadow_states">
       <script>scripts\scr_getinput.gml</script>
       <script>scripts\scr_collision.gml</script>
+      <script>scripts\scr_frixion.gml</script>
       <script>scripts\scr_shadow_stand.gml</script>
       <script>scripts\scr_shadow_crouch.gml</script>
       <script>scripts\scr_shadow_slide.gml</script>
+      <scripts name="scr_sprite">
+        <script>scripts\scr_sprite_stand.gml</script>
+        <script>scripts\scr_sprite_crouch.gml</script>
+        <script>scripts\scr_sprite_slide.gml</script>
+        <script>scripts\scr_sprite_jump.gml</script>
+      </scripts>
     </scripts>
   </scripts>
   <fonts name="fonts">

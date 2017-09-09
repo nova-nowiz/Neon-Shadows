@@ -133,75 +133,17 @@ switch(state)
 //on land
 if(place_meeting(x,y+1,obj_wall))
 {
-    if (state != states.crouch)
+    switch (state)
     {
-        //standing up (standing)
-        if (hsp == 0)
-        {
-            image_speed = 0.08;
-            if (previous_hsp_sign == 1) sprite_index = spr_shadow_standing_Right;
-            if (previous_hsp_sign == -1) sprite_index = spr_shadow_standing_Left;
-        }
-        
-        //standing up (walking)
-        if (mv * hsp &gt; 0)
-        {
-            image_speed = hsp/maxhsp * 0.08;
-            if (mv == 1) sprite_index = spr_shadow_moving_Right;
-            if (mv == -1) sprite_index = spr_shadow_moving_Left;
-        }
-        
-        //"drifting"
-        if (previousmv != mv &amp;&amp; mv * hsp &lt; 0)
-        {
-            image_speed = 0.08;
-            if (mv == 1) sprite_index = spr_shadow_drift_Right;
-            if (mv == -1) sprite_index = spr_shadow_drift_Left;
-        }
-    }
-    
-    if (state = states.crouch)
-    {
-        //crouching (standing)
-        if (hsp == 0)
-        {
-            image_speed = 0.08;
-            if (previous_hsp_sign == 1) sprite_index = spr_shadow_crouch_standing_Right;
-            if (previous_hsp_sign == -1) sprite_index = spr_shadow_crouch_standing_Left;
-        }
-        
-        //crouching (walking)
-        if (mv != 0)
-        {
-            image_speed = hsp/maxcrouchhsp * 0.08;
-            if (mv == 1) sprite_index = spr_shadow_crouch_moving_Right;
-            if (mv == -1) sprite_index = spr_shadow_crouch_moving_Left;
-        }
-    }
-    //sliding
-    if (state = states.slide)
-    {
-        image_speed = 0.08;
-        if (sign(hsp) &gt; 0) sprite_index = spr_shadow_slide_Right;
-        if (sign(hsp) &lt; 0) sprite_index = spr_shadow_slide_Left;
+        case states.stand: scr_sprite_stand(); break;
+        case states.crouch: scr_sprite_crouch(); break;
+        case states.slide: scr_sprite_slide(); break;
     }
 }
 
 if(!place_meeting(x, y+1,obj_wall))
 {
-    //jump (up)
-    if (vsp &gt; 0) 
-    {
-        if (mv &gt; 0)sprite_index = spr_shadow_jump_up_Right;
-        if (mv &lt; 0)sprite_index = spr_shadow_jump_up_Left;
-    }
-    
-    //jump (down)
-    if (vsp &lt; 0) 
-    {
-        if (mv &gt; 0)sprite_index = spr_shadow_jump_down_Right;
-        if (mv &lt; 0)sprite_index = spr_shadow_jump_down_Left;
-    }
+    scr_sprite_jump();
 }
 </string>
           </argument>

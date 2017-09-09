@@ -6,15 +6,7 @@ scr_getinput();
     mvsp = 1/sqrt(mvframecount+0.5);
     hsp += mv * mvsp;
     
-        //frixion
-        if (abs(hsp) >= fric)
-        {
-            if (mv == 0 || mv != sign(hsp))
-            {
-                hsp -= sign(hsp) * fric;
-            }
-        }
-        if (mv == 0 && abs(hsp) < fric) hsp = 0;
+    scr_frixion();
         
         //max speed
         if (abs(hsp) > maxhsp)
